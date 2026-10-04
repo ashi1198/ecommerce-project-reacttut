@@ -3,11 +3,11 @@ import { Header } from "../components/Header";
 
 import axios from "axios";
 import { useEffect, useState } from "react";
-export function HomePage() {
+export function HomePage({ cart }) {
   //fetch is a asynchronous function ,these function doesnt run right away so we gotta wait for them to finish first before we can use the data that they return. so we need to use async await to wait for the data to be fetched before we can use it.
   //fetch is used to make a request to a server and get data back from it. In this case, we are making a request to our backend server to get the list of products. The fetch function returns a promise that resolves to the response of the request. We can use the .then() method to handle the response and extract the data we need from it. In this case, we are using the .json() method to parse the response as JSON and get the list of products.
   const [products, setProducts] = useState([]);
-  const [cart, setCart] = useState([]);
+
   // fetch("http://localhost:3000/api/products").then((response) => {
   //   //response.json() is a method that parses the response body as JSON and returns a promise that resolves to the parsed data. In this case, we are using it to get the list of products from the response.it is also a asynchronous function so we need to use await to wait for it to finish before we can use the data that it returns.
   //   return response.json()
@@ -17,9 +17,6 @@ export function HomePage() {
   useEffect(() => {
     axios.get("/api/products").then((response) => {
       setProducts(response.data);
-    });
-    axios.get("/api/cart-items").then((response) => {
-      setCart(response.data);
     });
   }, []); //to not run multiple times we use useEffect hook
   //shortcut of localhost:3000 for vite use server proxy at api so any request at api will be forwarded to that location
