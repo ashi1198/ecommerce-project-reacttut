@@ -1,9 +1,9 @@
-import { HomePage } from "./pages/HomePage";
+import { HomePage } from "./pages/home/HomePage";
 import "./App.css";
-import { CheckoutPage } from "./pages/CheckoutPage";
+import { CheckoutPage } from "./pages/checkout/CheckoutPage";
 import { Routes, Route } from "react-router";
 import { useState, useEffect } from "react";
-import { OrdersPage } from "./pages/OrdersPage";
+import { OrdersPage } from "./pages/orders/OrdersPage";
 import axios from "axios";
 function App() {
   const [cart, setCart] = useState([]);
