@@ -7,19 +7,25 @@ import { OrdersPage } from "./pages/orders/OrdersPage";
 import axios from "axios";
 function App() {
   const [cart, setCart] = useState([]);
+  const loadCart = async () => {
+    //used query parameters api/cart-items? this is a query parameter backend will add extra details pf cart items matching product
+    const response = await axios.get("/api/cart-items?expand=product");
+    setCart(response.data);
+  };
   useEffect(() => {
-    const fetchAppData = async () => {
-      //used query parameters api/cart-items? this is a query parameter backend will add extra details pf cart items matching product
-      const response = await axios.get("/api/cart-items?expand=product");
-      setCart(response.data);
-    };
-    fetchAppData();
+    loadCart();
   }, []);
   return (
     <>
       <Routes>
-        <Route path="/" element={<HomePage cart={cart} />} />
-        <Route path="/checkout" element={<CheckoutPage cart={cart} />} />
+        <Route
+          path="/"
+          element={<HomePage cart={cart} loadCart={loadCart} />}
+        />
+        <Route
+          path="/checkout"
+          element={<CheckoutPage cart={cart} loadCart={loadCart} />}
+        />
         <Route path="/orders" element={<OrdersPage cart={cart} />} />
       </Routes>
     </>

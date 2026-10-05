@@ -3,7 +3,7 @@ import { Header } from "../../components/Header";
 import axios from "axios";
 import { useEffect, useState } from "react";
 import { ProductsGrid } from "./ProductsGrid";
-export function HomePage({ cart }) {
+export function HomePage({ cart, loadCart }) {
   //fetch is a asynchronous function ,these function doesnt run right away so we gotta wait for them to finish first before we can use the data that they return. so we need to use async await to wait for the data to be fetched before we can use it.
   //fetch is used to make a request to a server and get data back from it. In this case, we are making a request to our backend server to get the list of products. The fetch function returns a promise that resolves to the response of the request. We can use the .then() method to handle the response and extract the data we need from it. In this case, we are using the .json() method to parse the response as JSON and get the list of products.
   const [products, setProducts] = useState([]);
@@ -31,7 +31,7 @@ export function HomePage({ cart }) {
       <title>Ecommerce project</title>
 
       <div className="home-page">
-        <ProductsGrid products={products} />
+        <ProductsGrid products={products} loadCart={loadCart} />
       </div>
     </>
   );
