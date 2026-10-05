@@ -13,11 +13,16 @@ export function HomePage({ cart }) {
   //   return response.json()
   // }).then((data) => {
   //     console.log(data);
+  //instead of then we will use async await instead of then cause they use promises async await too uses it but it looks cleaner
   //   });  cleaner way is axios library which is a promise based HTTP client for the browser and node.js. It makes it easy to send asynchronous HTTP requests to REST endpoints and perform CRUD operations. It also supports the Promise API that is native to JS ES6+.
   useEffect(() => {
-    axios.get("/api/products").then((response) => {
+    const getHomeData = async () => {
+      const response = await axios.get("/api/products");
       setProducts(response.data);
-    });
+    };
+    getHomeData(); //we made async new function and did not make the call back in use Effect cause it also returns promise and then we will need to fetch it
+    //thats why and gethomedata will return a promise in use Effect there should be nothinf return or clean up functions only useEffect should not return anything or just cleanup function
+    //whenver we use useEffect remember to create a new async function with a call back
   }, []); //to not run multiple times we use useEffect hook
   //shortcut of localhost:3000 for vite use server proxy at api so any request at api will be forwarded to that location
   return (

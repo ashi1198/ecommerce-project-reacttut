@@ -8,10 +8,12 @@ import axios from "axios";
 function App() {
   const [cart, setCart] = useState([]);
   useEffect(() => {
-    //used query parameters api/cart-items? this is a query parameter backend will add extra details pf cart items matching product
-    axios.get("/api/cart-items?expand=product").then((response) => {
+    const fetchAppData = async () => {
+      //used query parameters api/cart-items? this is a query parameter backend will add extra details pf cart items matching product
+      const response = await axios.get("/api/cart-items?expand=product");
       setCart(response.data);
-    });
+    };
+    fetchAppData();
   }, []);
   return (
     <>
